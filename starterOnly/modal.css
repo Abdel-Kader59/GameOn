@@ -184,3 +184,98 @@ main {
   color: #fff;
   padding-top: 10px;
 }
+@media screen and (max-width: 425px) {
+  .content {
+    margin-top: 74px;
+  }
+  .bground {
+    background-color: transparent;
+  }
+  .footer{
+    background-color: transparent;
+  }
+}
+
+.modal-body {
+  padding: 15px 8%;
+  margin: 15px auto;
+  position: relative;
+}
+
+label {
+  font-family: var(--font-default);
+  font-size: 17px;
+  font-weight: normal;
+  display: inline-block;
+  margin-bottom: 11px;
+}
+input {
+  padding: 8px;
+  border: 0.8px solid #ccc;
+  outline: none;
+}
+.text-control {
+  margin: 0;
+  padding: 8px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 20px;
+  height: 48px;
+}
+
+/*pour cacher ma SPAN d'error*/
+.formField .message {
+  display: none;
+  font-size: 0.8rem;
+  color: red;
+}
+/*pour afficher ma SPAN d'error*/
+.formField.hasError .message{
+  display: block;
+}
+/*pour ajouter mon border ROUGE*/
+.formField.hasError input {
+  border: 2px solid red;
+}
+
+
+.checkbox-label,
+.checkbox2-label {
+  position: relative;
+  margin-left: 36px;
+  font-size: 12px;
+  font-weight: normal;
+}
+.checkbox-label .checkbox-icon,
+.checkbox2-label .checkbox-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #279e7a;
+  border-radius: 50%;
+  text-indent: 29px;
+  white-space: nowrap;
+  position: absolute;
+  left: -30px;
+  top: -1px;
+  transition: 0.3s;
+}
+.checkbox-label .checkbox-icon::after,
+.checkbox2-label .checkbox-icon::after {
+  content: "";
+  width: 13px;
+  height: 13px;
+  background-color: #279e7a;
+  border-radius: 50%;
+  text-indent: 29px;
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.3s;
+  opacity: 0;
+}
+.checkbox-input {
+  display: none;
+}

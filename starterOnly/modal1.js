@@ -112,3 +112,106 @@ function validerChampCheckbox(inputCheckbox) {
     }
     inputCheckbox.closest('.formField').classList.remove("hasError");
 }
+
+//Function pour valider tous les champs si strictement égal à 0, je remplace mon formulaire par celui de validation.
+//La propriété Element.innerHTML de Element récupère ou définit la syntaxe HTML décrivant les descendants de l'élément.
+//Permet de remplacer aisément le contenu existant d'un élément par un nouveau contenu donc efface tous les élements enfants (oldForm)
+function formIsValid() {
+    // console.log(document.querySelectorAll('.formField.hasError'));
+    const isValid = document.querySelectorAll('.formField.hasError').length;
+    // affiche combien de message d'erreurs sont présents, de base 7.
+    // console.log(isValid);
+    if (isValid === 0) {
+        const form = document.getElementById("formReservation");
+        // console.log(form);
+        form.innerHTML = `<div class="victory"><h1>Merci ! Votre réservation a été reçue.</h1>
+        <div class="wrapper-btn"><button id="btn-close" class="btn-submit">Fermer</button></div></div>`
+    }
+}
+
+// const validFdorm = document.createElement('div');
+// console.log(validFdorm);
+
+//je récupère via l'id unique, mon formulaire FORM et j'ajoute un écouteur (sur submit premier paramètre puis deuxième paramètre, (event) est la paramètre de ma deuxième function)
+document.getElementById("formReservation").addEventListener("submit",(event) => {
+    console.log(event);
+    //permet de couper l'action submit de mon formulaire
+    event.preventDefault();
+
+    // Je séléctionne tous les éléments qui ont l'attribut data-validator que je met dans la constante formFields (Nodelist avec tous mes input)
+    const formFields = document.querySelectorAll("[data-validator]");
+    // console.log(formFields);
+    // pour chaque champs du formulaire je récupère mon élement
+    formFields.forEach((champFormulaire) => {
+        // champformulaire contient tout mes inputs
+        // console.log(champFormulaire);
+        // je stock la valeur de data-validator (text, email, birthdate, quantity, location, checkbox)
+        const validatorType = champFormulaire.dataset.validator;
+        // console.log(validatorType);
+        // l’instruction switch représente une alternative à l’utilisation d’un if…else if…else.
+        switch (validatorType) {
+            case 'text':
+                validerChampTexte(champFormulaire);
+                break;
+            case 'email':
+                validerChampMail(champFormulaire);
+                break;
+            case 'birthdate':
+                validerChampBirthdate(champFormulaire);
+                break;
+            case 'quantity':
+                validerChampQuantity(champFormulaire);
+                break;
+            case 'location':
+                validerChampLocation(champFormulaire);
+                break;
+            case 'checkbox':
+                validerChampCheckbox(champFormulaire);
+                break;
+        }
+    });
+    formIsValid();
+    const btnClose = document.getElementById("btn-close");
+    btnClose.addEventListener("click",(event) => {
+        closeModal();
+        // resetModal();
+        // Permet de recharger la page, vide le formulaire mais mauvaise pratique
+        document.location.reload();
+        // pour vider le formulaire je peux aussi faire input.value ="";
+    });
+});
+
+// Function qui permet de reset le formulaire mais vu que je supprime avant mon innerHTML pas possible
+// function resetModal() {
+//     document.getElementById("formReservation").reset();
+// }
+
+// Initialisation des évents
+// Permet d'executer ma function Init, il faut créer une function ok mais ensuite il faut penser à la lancer !
+init();
+
+function init() {
+    // launch modal event
+    modalBtn.forEach((btn) => {
+        btn.addEventListener("click",launchModal);
+        // constante qui regroupe mes deux boutons je m'inscris, pour chaque boutons j'ajoute un ecouteur au clic et je lance ma function launchmodal.
+        // console.log(btn);
+    });
+
+    //close modal event
+    // ajouter un écouteur sur la croix
+    closeBtn.addEventListener("click",closeModal);
+}
+
+// display background when modal form is open
+// ajout de classe show (visibility: visible;)
+function launchModal() {
+    modalbg.classList.add("show");
+}
+
+// display background when modal form is closed
+// suppression de classe show (plus visible)
+function closeModal() {
+    modalbg.classList.remove("show");
+}
+

@@ -3,6 +3,7 @@
 
 ![GameOn]
  * [Mon GitHub Pages] https://github.com/Abdel-Kader59/GameOn.git
+ * [Pages] https://abdel-kader59.github.io/GameOn/
 
 
 # Projet GameOn
